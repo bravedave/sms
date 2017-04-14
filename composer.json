@@ -15,5 +15,9 @@
 		"bravedave/dvc": "dev-master",
 		"giggsey/libphonenumber-for-php": "^8.4"
 	}
-
+	"autoload": {
+		"psr-4": {
+			"sms\\": ""
+		}
+	}
 }
