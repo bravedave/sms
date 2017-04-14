@@ -186,7 +186,7 @@ class sms {
 
 			}
 			catch ( \libphonenumber\NumberParseException $e) {
-				return ( $e->description());
+				return ( $e->getMessage());
 
 			}
 
