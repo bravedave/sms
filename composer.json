@@ -16,6 +16,6 @@
 		"giggsey/libphonenumber-for-php": "^8.4"
 	},
 	"autoload": {
-		"psr-4": { "sms\\": "" }
+		"psr-4": { "sms\\": "sms/" }
 	}
 }
