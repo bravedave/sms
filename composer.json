@@ -1,0 +1,19 @@
+{
+	"name": "bravedave/sms",
+	"description": "SMS - SMS Sending module for bravedave/DVC",
+	"version": "0.0.1",
+	"keywords": ["SMS"],
+	"homepage": "http://brayworth.com",
+	"type": "library",
+	"license": "MIT",
+	"authors": [{
+		"name": "Brave Dave",
+		"email": "davbray@gmail.com",
+		"homepage": "http://brayworth.com"
+	}],
+	"require": {
+		"bravedave/dvc": "dev-master",
+		"giggsey/libphonenumber-for-php": "^8.4"
+	}
+
+}
