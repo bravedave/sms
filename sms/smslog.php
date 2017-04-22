@@ -12,7 +12,7 @@ NameSpace sms;
 
 class smslog {
 	function log( $to, $msg, $res, $full_result ) {
-		\sys::logger( sprintf( 'SMS: %s => %s : %s (%s)', $to, $msg, $res, $full_result));
+		error_log( sprintf( 'SMS: %s => %s : %s (%s)', $to, $msg, $res, $full_result));
 
 	}
 

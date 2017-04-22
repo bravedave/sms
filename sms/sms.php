@@ -9,7 +9,6 @@
 	*/
 
 NameSpace sms;
-Use dvc;
 
 class sms {
 	protected $account, $smslog, $error;
@@ -20,11 +19,14 @@ class sms {
 	const smsbroadcastAPI_advanced = 'https://api.smsbroadcast.com.au/api-adv.php';
 	const smsbroadcast_MAXLENGTH = '760';
 
-	protected static function smsbroadcastSMS( $aContent ) {
-		$http = new dvc\HttpPost( self::smsbroadcastAPI_advanced);
-			$http->setPostData( $aContent);
-			$http->send();
-			return ( $http->getResponse());
+	protected static function smsbroadcastSMS( $content ) {
+		$ch = curl_init( self::smsbroadcastAPI_advanced);
+		curl_setopt( $ch, CURLOPT_POST, true);
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $content, NULL, '&', PHP_QUERY_RFC3986));
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true);
+		$output = curl_exec ( $ch);
+		curl_close ( $ch);
+		return ($output);
 
 	}
 
