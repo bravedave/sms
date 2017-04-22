@@ -1,7 +1,7 @@
 {
 	"name": "bravedave/sms",
 	"description": "SMS - SMS Sending module for bravedave/DVC",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"keywords": ["SMS"],
 	"homepage": "http://brayworth.com",
 	"type": "library",

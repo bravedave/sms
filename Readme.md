@@ -1,6 +1,6 @@
 # SMS - SMS Sending module for bravedave/DVC
 
-* Works with smsbroadcast.com.au
+* Works with https://smsbroadcast.com.au
 * could be developed with https://www.nexmo.com/
 
 ## Example
