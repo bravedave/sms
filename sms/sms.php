@@ -96,19 +96,22 @@ class sms {
 
 	public function send( $to = '', $msg = '' ) {
 		if ( $this->account->enabled) {
-			if ( is_array( $to )) {
-				$a = array();
+			if ( is_array( $to)) {
+				$a = [];
 				foreach ( $to as $t)
 					$a[] = $this->_send( $t, $msg );
 
 				return ( implode( ' : ', $a ));
 
 			}
-			elseif ( $to == "" )
+			elseif ( $to == '') {
 				return ( $this->error->description = 'Empty Telephone');
 
-			else
-				return ( $this->_send( $to, $msg ));
+			}
+			else {
+				return ( $this->_send( $to, $msg));
+
+			}
 
 		}
 		else
@@ -117,8 +120,10 @@ class sms {
 	}
 
 	protected function _send( $to = '', $msg = '' ) {
-		if ( $to == '' )
+		if ( $to == '' ) {
 			return 'nak (empty to)';
+
+		}
 
 		if ( preg_match( '/smsbroadcast/', $this->account->providor )) {
 			$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
@@ -148,7 +153,11 @@ class sms {
 							'maxsplit' => 5 ];
 							//~ '&ref='.rawurlencode($ref);
 
-						if ( $this->fake ) {
+						/*
+						 * In Australia 0499 is not a valid mobile number
+						 * use 0499 for dummy positive result ..
+						 */
+						if ( $this->fake || preg_match( '@^\+?(61|0)499.*@', $to)) {
 							$full_result = "fake ($to)";
 							$res = "fake ($to)";
 
