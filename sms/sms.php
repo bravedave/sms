@@ -8,12 +8,12 @@
 		http://creativecommons.org/licenses/by/4.0/
 	*/
 
-NameSpace sms;
+namespace sms;
 
 class sms {
 	protected $account, $smslog, $error;
 
-	public $fake = FALSE;
+	public $fake = false;
 
 	const smsbroadcastAPI = 'https://api.smsbroadcast.com.au/api.php';
 	const smsbroadcastAPI_advanced = 'https://api.smsbroadcast.com.au/api-adv.php';
@@ -30,9 +30,9 @@ class sms {
 
 	}
 
-	public function __construct( account $smsAccount, $logger = NULL ) {
+	public function __construct( account $smsAccount, $logger = null ) {
 		$this->account = $smsAccount;
-		$this->smslog = ( is_null( $logger) ? new smslog() : $logger);
+		$this->smslog = ( is_null( $logger) ? new smslog : $logger);
 		$this->error = (object)['description' => ''];
 
 	}
@@ -94,12 +94,12 @@ class sms {
 
 	}
 
-	public function send( $to = '', $msg = '' ) {
+	public function send( $to = '', $msg = '', $evt = 'sms') {
 		if ( $this->account->enabled) {
 			if ( is_array( $to)) {
 				$a = [];
 				foreach ( $to as $t)
-					$a[] = $this->_send( $t, $msg );
+					$a[] = $this->_send( $t, $msg, $evt );
 
 				return ( implode( ' : ', $a ));
 
@@ -109,7 +109,7 @@ class sms {
 
 			}
 			else {
-				return ( $this->_send( $to, $msg));
+				return ( $this->_send( $to, $msg, $evt));
 
 			}
 
@@ -119,7 +119,7 @@ class sms {
 
 	}
 
-	protected function _send( $to = '', $msg = '' ) {
+	protected function _send( $to, $msg, $evt) {
 		if ( $to == '' ) {
 			return 'nak (empty to)';
 
@@ -166,7 +166,7 @@ class sms {
 							$full_result = self::smsbroadcastSMS( $content );
 							$response_lines = explode("\n", $full_result);
 
-							$res = array();
+							$res = [];
 							foreach( $response_lines as $data_line ) {
 								$data = explode( ':', $data_line );
 								if( $data[0] == "OK" )
@@ -183,7 +183,8 @@ class sms {
 							$res = implode( ",", $res );
 
 						}
-						$this->smslog->log( $to, $msg, $res, $full_result );
+
+						$this->smslog->log( $to, $msg, $res, $full_result, $evt );
 
 					}
 

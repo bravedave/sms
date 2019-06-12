@@ -8,10 +8,10 @@
 		http://creativecommons.org/licenses/by/4.0/
 	*/
 
-NameSpace sms;
+namespace sms;
 
 class smslog {
-	function log( $to, $msg, $res, $full_result ) {
+	function log( $to, $msg, $res, $full_result, $evt ) {
 		error_log( sprintf( 'SMS: %s => %s : %s (%s)', $to, $msg, $res, $full_result));
 
 	}
