@@ -153,11 +153,8 @@ class sms {
 							'maxsplit' => 5 ];
 							//~ '&ref='.rawurlencode($ref);
 
-						/*
-						 * In Australia 0499 is not a valid mobile number
-						 * use 0499 for dummy positive result ..
-						 */
-						if ( $this->fake || preg_match( '@^\+?(61|0)499.*@', $to)) {
+						if ( $this->fake) {
+						//~ if ( $this->fake || preg_match( '@^\+?(61|0)499.*@', $to)) {
 							$full_result = "fake ($to)";
 							$res = "fake ($to)";
 
