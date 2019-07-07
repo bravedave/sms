@@ -6,19 +6,15 @@
 
 	This work is licensed under a Creative Commons Attribution 4.0 International Public License.
 		http://creativecommons.org/licenses/by/4.0/
+
 	*/
 
-namespace sms;
+class application extends dvc\application {
+	private $_settings = FALSE;
 
-class account {
-	var $enabled = false;
+	static function run() {
+		$app = new application( dirname( __FILE__ ) . '/../' );
 
-	var $countrycode = '';
-
-	// smsbroadcast requirements
-	var $providor = '';
-	var $accountid = '';
-	var $accountpassword = '';
-	var $fromnumber = '';
+	}
 
 }
