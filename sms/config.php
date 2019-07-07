@@ -8,9 +8,9 @@
 		http://creativecommons.org/licenses/by/4.0/
 
 	*/
-namespace dvc;
+namespace sms;
 
-abstract class config extends _config {
+abstract class config extends \config {
 	static $WEBNAME = 'SMS Demo Application for DVC';
 	static $SMS_VIRTUAL = '';
 

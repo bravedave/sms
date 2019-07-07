@@ -1,11 +1,11 @@
 <?php
 /*
 	David Bray
-	D'Arcy Estate Agents & BrayWorth Pty Ltd
+	BrayWorth Pty Ltd
 	e. david@brayworth.com.au
 
-	This work is licensed under a Attribution-NonCommercial-NoDerivatives 4.0 International Public License.
-		https://creativecommons.org/licenses/by-nc-nd/4.0/
+	This work is licensed under a Creative Commons Attribution 4.0 International Public License.
+		http://creativecommons.org/licenses/by/4.0/
 
 	usage:
 		_brayworth_.loadModal({
@@ -13,7 +13,7 @@
 
 		})
 		.then( function( modal) {
-			$('form', modal).trigger( 'add.recipient', '0418745334');
+			$('form', modal).trigger( 'add.recipient', '041..');
 
 			$('textarea[name="message"]', modal).focus();
 

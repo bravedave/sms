@@ -23,12 +23,6 @@ spl_autoload_register(function ($class) {
 
 $autoload = __DIR__ . '/../vendor/bravedave/dvc/autoloader.php';
 $autoloadLocal = __DIR__ . '/../../dvc/autoloader-local.php';
-//~ print __DIR__ . '<br />';
-//~ print realpath( __DIR__) . '<br />';
-//~ print realpath( __DIR__ . '/../') . '<br />';
-//~ print realpath( __DIR__ . '/../../') . '<br />';
-//~ print realpath( __DIR__ . '/../../dvc/autoloader-local.php') . '<br />';
-//~ die;
 
 if ( file_exists( $autoload)) {
 	require_once $autoload;

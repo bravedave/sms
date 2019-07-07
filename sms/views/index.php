@@ -9,7 +9,7 @@
 
 	*/	?>
 <div class="row">
-	<div class="col">
+	<div class="col pt-4">
 		<ul class="list-unstyled mt-4">
 			<li><h6>Index</h6></li>
 			<li><a href="#" id="<?= $uid = strings::rand() ?>">SMS</a></li>

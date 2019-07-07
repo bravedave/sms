@@ -7,8 +7,7 @@
 	This work is licensed under a Creative Commons Attribution 4.0 International Public License.
 		http://creativecommons.org/licenses/by/4.0/
 	*/
-	$settings = \config::smsconfig();
-	if ( $settings && !isset( $settings->from)) $settings->from = '';
+	$settings = $this->data->settings;
 	?>
 <form method="post" action="/">
 	<input type="hidden" name="action" value="save-settings" />
