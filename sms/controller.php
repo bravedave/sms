@@ -8,6 +8,8 @@
 		http://creativecommons.org/licenses/by/4.0/
 	*/
 namespace sms;
+use Response;
+use url;
 
 class controller extends \Controller {
 	protected $_handler = null;
