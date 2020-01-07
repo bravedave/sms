@@ -10,10 +10,11 @@
 	*/	?>
 <div class="row">
 	<div class="col pt-4">
+		<h6>Index</h6>
+
 		<ul class="list-unstyled mt-4">
-			<li><h6>Index</h6></li>
 			<li><a href="#" id="<?= $uid = strings::rand() ?>">SMS</a></li>
-			<li><a href="<?php url::write( 'settings') ?>">Settings</a></li>
+			<li><a href="<?= strings::url( sprintf( '%s/settings', $this->route)) ?>">Settings</a></li>
 
 		</ul>
 
@@ -31,7 +32,7 @@ $(document).ready( function() {
 			//~ onSuccess : function() { /* trigger( 'brayworth.success') */},
 
 		_brayworth_.loadModal({
-			url : '<?php url::write('/dialog') ?>',
+			url : '<?= strings::url( sprintf( '%s/dialog', $this->route)) ?>',
 
 		})
 		.then( function( modal) {
