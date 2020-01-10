@@ -9,7 +9,7 @@
 	*/
 	$settings = $this->data->settings;
 	?>
-<form method="post" action="/">
+<form method="post" action="<?= $this->route ?>">
 	<input type="hidden" name="action" value="save-settings" />
 
 	<div class="form-group row">

@@ -36,7 +36,7 @@ abstract class config extends \config {
 
 			}
 
-			return new \sms\sms( $account);
+			return new sms( $account);
 
 		}
 

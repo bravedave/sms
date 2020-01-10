@@ -11,14 +11,14 @@
 namespace sms;
 
 class account {
-	var $enabled = false;
+	public $enabled = false;
 
-	var $countrycode = '';
+	public $countrycode = '';
 
 	// smsbroadcast requirements
-	var $providor = '';
-	var $accountid = '';
-	var $accountpassword = '';
-	var $fromnumber = '';
+	public $providor = '';
+	public $accountid = '';
+	public $accountpassword = '';
+	public $fromnumber = '';
 
 }
