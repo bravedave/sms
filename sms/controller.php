@@ -9,7 +9,6 @@
 	*/
 namespace sms;
 use Response;
-use url;
 
 class controller extends \Controller {
 	protected $_handler = null;
@@ -51,7 +50,7 @@ class controller extends \Controller {
 
 			//~ sys::dump( $a);
 
-			Response::redirect( url::tostring());
+			Response::redirect();
 
 		}
 		elseif ( 'send-sms' == $action) {
@@ -111,13 +110,6 @@ class controller extends \Controller {
 
 	}
 
-	function index() {
-		$this->isPost() ?
-			$this->postHandler() :
-			$this->_index();
-
-	}
-
 	public function dialog() {
 		$this->modal([
 			'title' => 'SMS',
@@ -127,7 +119,7 @@ class controller extends \Controller {
 
 	}
 
-	function settings() {
+	public function settings() {
 		$this->data = (object)[
 			'settings' => config::smsconfig()
 
