@@ -111,7 +111,7 @@ class controller extends \Controller {
 	}
 
 	public function dialog() {
-		if ( $this->_handler->enabled) {
+		if ( $this->_handler) {
 
 			$this->modal([
 				'title' => 'SMS',
