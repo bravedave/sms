@@ -111,11 +111,24 @@ class controller extends \Controller {
 	}
 
 	public function dialog() {
-		$this->modal([
-			'title' => 'SMS',
-			'load' => 'sms-modal'
+		if ( $this->_handler->enabled) {
 
-		]);
+			$this->modal([
+				'title' => 'SMS',
+				'load' => 'sms-modal'
+
+			]);
+
+		}
+		else {
+			$this->modal([
+				'title' => 'SMS',
+				'headerClass' => 'bg-warning',
+				'load' => 'not-enabled'
+
+			]);
+
+		}
 
 	}
 
