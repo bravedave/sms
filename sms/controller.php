@@ -1,31 +1,34 @@
 <?php
 /*
-	David Bray
-	BrayWorth Pty Ltd
-	e. david@brayworth.com.au
+ * David Bray
+ * BrayWorth Pty Ltd
+ * e. david@brayworth.com.au
+ *
+ * MIT License
+ *
+ * styleguide : https://codeguide.co/
+*/
 
-	This work is licensed under a Creative Commons Attribution 4.0 International Public License.
-		http://creativecommons.org/licenses/by/4.0/
-	*/
 namespace sms;
 use Response;
 
 class controller extends \Controller {
 	protected $_handler = null;
+	protected $viewPath = __DIR__ . '/views/';
 
 	protected function before() {
 		$this->_handler = config::smshandler();
 
 	}
 
-	protected function getView( $viewName = 'index', $controller = null, $logMissingView = true) {
-		$view = sprintf( '%s/views/%s.php', __DIR__, $viewName );		// php
-		if ( file_exists( $view))
-			return ( $view);
+	// protected function getView( $viewName = 'index', $controller = null, $logMissingView = true) {
+	// 	$view = sprintf( '%s/views/%s.php', __DIR__, $viewName );		// php
+	// 	if ( file_exists( $view))
+	// 		return ( $view);
 
-		return parent::getView( $viewName, $controller, $logMissingView);
+	// 	return parent::getView( $viewName, $controller, $logMissingView);
 
-	}
+	// }
 
 	protected function posthandler() {
 		$debug = false;

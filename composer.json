@@ -1,8 +1,8 @@
 {
 	"name": "bravedave/sms",
 	"description": "SMS - SMS Sending module for bravedave/DVC",
-	"version": "1.0.0",
 	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"keywords": ["SMS"],
 	"homepage": "http://brayworth.com",
 	"type": "library",
@@ -14,10 +14,15 @@
 	}],
 	"require": {
 		"php": ">=7.0",
-		"bravedave/dvc": "*",
+		"bravedave/dvc": "^20.10",
 		"giggsey/libphonenumber-for-php": "^8.4"
 	},
 	"autoload": {
-		"psr-4": { "sms\\": "sms/" }
+		"psr-4": {
+			"": "application/app/",
+			"sms\\": "sms/"
+
+		}
+
 	}
 }
