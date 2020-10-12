@@ -14,7 +14,7 @@
 	}],
 	"require": {
 		"php": ">=7.0",
-		"bravedave/dvc": "^20.10",
+		"bravedave/dvc": "*",
 		"giggsey/libphonenumber-for-php": "^8.4"
 	},
 	"autoload": {
