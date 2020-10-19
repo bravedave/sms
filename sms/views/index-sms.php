@@ -20,7 +20,7 @@ $(document).ready( () => {( _ => {
 
 		_.get.modal( _.url( '<?= $this->route ?>/dialog'))
 		.then( modal => {
-			$('form', modal).trigger( 'add.recipient', '0418745334');
+			modal.trigger( 'add.recipient', '0418745334');
 			$('textarea[name="message"]', modal).focus();
 
 		});

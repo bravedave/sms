@@ -32,7 +32,25 @@ class controller extends \Controller {
 
 		$action = $this->getPost('action');
 
-		if ( 'get-by-phone' == $action) {
+		if ( 'get-people-by-id' == $action) {
+			if ( $id = $this->getPost( 'id')) {
+				$dao = new dao\people;
+				if ( $dto = $dao->getByID( $id)) {
+					Json::ack( 'person')->add('data', [
+						'id' => $dto->id,
+						'name' => $dto->name,
+						'mobile' => $dto->mobile,
+						'mobile2' => $dto->mobile2,
+						'email' => $dto->email,
+
+					]);
+
+				} else { Json::nak( $action); }
+
+			} else { Json::nak( $action); }
+
+		}
+		elseif ( 'get-people-by-phone' == $action) {
 			if ( $tel = $this->getPost( 'tel')) {
 				$dao = new dao\people;
 				if ( $dto = $dao->getByMobile( $tel)) {
@@ -164,12 +182,8 @@ class controller extends \Controller {
 
 	public function dialog() {
 		if ( $this->_handler) {
-
-			$this->modal([
-				'title' => 'SMS',
-				'load' => 'sms-modal'
-
-			]);
+			$this->title = 'SMS';
+			$this->load('sms-modal');
 
 		}
 		else {
