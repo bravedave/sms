@@ -1,21 +1,22 @@
 <?php
 /*
-	David Bray
-	BrayWorth Pty Ltd
-	e. david@brayworth.com.au
+ * David Bray
+ * BrayWorth Pty Ltd
+ * e. david@brayworth.com.au
+ *
+ * MIT License
+ *
+*/
 
-	This work is licensed under a Creative Commons Attribution 4.0 International Public License.
-		http://creativecommons.org/licenses/by/4.0/
-	*/
 	$settings = $this->data->settings;
 	?>
 <form method="post" action="<?= $this->route ?>">
-	<input type="hidden" name="action" value="save-settings" />
+	<input type="hidden" name="action" value="save-settings">
 
 	<div class="form-group row">
 		<div class="col">
 			<label>Country Code:</label>
-			<input type="text" class="form-control" name="countrycode" value="<?php if ( $settings) print $settings->countrycode; ?>" required />
+			<input type="text" class="form-control" name="countrycode" value="<?php if ( $settings) print $settings->countrycode; ?>" required>
 
 		</div>
 
@@ -24,7 +25,7 @@
 	<div class="form-group row">
 		<div class="col">
 			<label>From:</label>
-			<input type="text" class="form-control" name="from" value="<?php if ( $settings) print $settings->from; ?>" required />
+			<input type="text" class="form-control" name="from" value="<?php if ( $settings) print $settings->from; ?>" required>
 
 		</div>
 
@@ -46,7 +47,7 @@
 	<div class="form-group row">
 		<div class="col">
 			<label>Account: </label>
-			<input type="text" class="form-control" name="account" value="<?php if ( $settings) print $settings->account; ?>" required />
+			<input type="text" class="form-control" name="account" value="<?php if ( $settings) print $settings->account; ?>" required>
 
 		</div>
 
@@ -56,7 +57,7 @@
 		<div class="col">
 			<label>Password:</label>
 			<div class="input-group">
-				<input type="password" class="form-control" name="password" value="<?php if ( $settings) print $settings->password; ?>" required />
+				<input type="password" class="form-control" name="password" value="<?php if ( $settings) print $settings->password; ?>" required>
 
 				<div class="input-group-append" id="<?= $uid = strings::rand() ?>">
 					<div class="input-group-text">

@@ -2,7 +2,6 @@
 	"name": "bravedave/sms",
 	"description": "SMS - SMS Sending module for bravedave/DVC",
 	"minimum-stability": "dev",
-	"prefer-stable": true,
 	"keywords": ["SMS"],
 	"homepage": "http://brayworth.com",
 	"type": "library",
@@ -12,11 +11,6 @@
 		"email": "davbray@gmail.com",
 		"homepage": "http://brayworth.com"
 	}],
-	"require": {
-		"php": ">=7.0",
-		"bravedave/dvc": "*",
-		"giggsey/libphonenumber-for-php": "^8.4"
-	},
 	"autoload": {
 		"psr-4": {
 			"": "application/app/",
@@ -24,5 +18,16 @@
 
 		}
 
+	},
+	"require": {
+		"php": ">=7.0",
+		"bravedave/dvc": "*",
+		"giggsey/libphonenumber-for-php": "^8.4",
+		"bravedave/green": "dev-master"
+	},
+	"scripts": {
+		"post-update-cmd": [
+			"sms\\postUpdate::upgrade"
+		]
 	}
 }

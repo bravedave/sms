@@ -3,3 +3,6 @@
 
 *.php text eol=lf
 *.json text eol=lf
+
+*.cmd linguist-vendored
+*.sh linguist-vendored

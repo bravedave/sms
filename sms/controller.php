@@ -6,10 +6,12 @@
  *
  * MIT License
  *
- * styleguide : https://codeguide.co/
 */
 
 namespace sms;
+
+use green\search;
+use Json;
 use Response;
 
 class controller extends \Controller {
@@ -17,18 +19,11 @@ class controller extends \Controller {
 	protected $viewPath = __DIR__ . '/views/';
 
 	protected function before() {
+		config::sms_checkdatabase();
 		$this->_handler = config::smshandler();
+		parent::before();
 
 	}
-
-	// protected function getView( $viewName = 'index', $controller = null, $logMissingView = true) {
-	// 	$view = sprintf( '%s/views/%s.php', __DIR__, $viewName );		// php
-	// 	if ( file_exists( $view))
-	// 		return ( $view);
-
-	// 	return parent::getView( $viewName, $controller, $logMissingView);
-
-	// }
 
 	protected function posthandler() {
 		$debug = false;
@@ -36,7 +31,36 @@ class controller extends \Controller {
 
 		$action = $this->getPost('action');
 
-		if ( 'save-settings' == $action) {
+		if ( 'get-by-phone' == $action) {
+			if ( $tel = $this->getPost( 'tel')) {
+				$dao = new dao\people;
+				if ( $dto = $dao->getByMobile( $tel)) {
+					Json::ack( 'person')->add('data', [
+						'id' => $dto->id,
+						'name' => $dto->name,
+						'mobile' => $dto->mobile,
+						'mobile2' => $dto->mobile2,
+						'email' => $dto->email,
+
+					]);
+
+				}
+				elseif ( $dto = $dao->getByMobile( $tel, $mobile2 = true)) {
+					Json::ack( 'person')->add('data', [
+						'id' => $dto->id,
+						'name' => $dto->name,
+						'mobile' => $dto->mobile,
+						'mobile2' => $dto->mobile2,
+						'email' => $dto->email,
+
+					]);
+
+				} else { Json::nak( $action); }
+
+			} else { Json::nak( $action); }
+
+		}
+		elseif ( 'save-settings' == $action) {
 			$a = [
 				'countrycode' => $this->getPost('countrycode'),
 				'providor' => $this->getPost('providor'),
@@ -46,16 +70,34 @@ class controller extends \Controller {
 
 			];
 
-			$config = sprintf( '%s%ssms-account.json', config::dataPath(), DIRECTORY_SEPARATOR);
+			$config = config::sms_account_file();
 			if ( file_exists( $config)) unlink( $config);
+			file_put_contents(
+				$config,
+				json_encode( $a, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
 
-			file_put_contents( $config, json_encode( $a, JSON_UNESCAPED_SLASHES));
+			);
 
 			//~ sys::dump( $a);
 
 			Response::redirect();
 
 		}
+		elseif ( 'search-person' == $action) {
+			if ( $term = $this->getPost('term')) {
+        // \sys::logger( sprintf('<%s> %s', $term, __METHOD__));
+
+				Json::ack( $action)
+					->add( 'term', $term)
+					->add( 'data', search::people( $term));
+
+			}
+			else {
+				Json::nak( $action);
+
+			}
+
+    }
 		elseif ( 'send-sms' == $action) {
 			$evt = $this->getPost('event');
 			$msg = $this->getPost('message');
@@ -108,7 +150,13 @@ class controller extends \Controller {
 		$this->render([
 			'title' => $this->title = 'SMS Sample Application',
 			'primary' => 'blank',
-			'secondary' =>'index'
+			'secondary' => [
+				'index-title',
+				'index-sms',
+				'index-people'
+
+			]
+
 		]);
 
 	}
@@ -137,7 +185,7 @@ class controller extends \Controller {
 
 	public function settings() {
 		$this->data = (object)[
-			'settings' => config::smsconfig()
+			'settings' => config::sms_account()
 
 		];
 
