@@ -13,6 +13,7 @@ namespace sms;
 use green\search;
 use Json;
 use Response;
+use strings;
 
 class controller extends \Controller {
 	protected $_handler = null;
@@ -105,7 +106,7 @@ class controller extends \Controller {
 			if ( $debug) \sys::logger( sprintf( 'sms::msg( %s)', $msg ));
 
 			if ( $msg == "" ) {
-				\Json::nak( '/sms: message is missing');
+				Json::nak( '/sms: message is missing');
 				if ( $debug) \sys::logger( 'sms: message is missing');
 
 			}
@@ -116,7 +117,7 @@ class controller extends \Controller {
 
 					$to = [];
 					foreach ( $_to as $t ) {
-						if ( sms\sms::IsMobilePhone( $t)) {
+						if ( strings::IsMobilePhone( $t)) {
 							$to[] = $t;
 
 						}
@@ -124,16 +125,16 @@ class controller extends \Controller {
 					}
 
 					if ( count( $to)) {
-						if ( $virtual && sms\sms::IsMobilePhone( config::$SMS_VIRTUAL)) {
+						if ( $virtual && strings::IsMobilePhone( config::$SMS_VIRTUAL)) {
 							$this->_handler->setFrom( config::$SMS_VIRTUAL);
 
 						}
 
-						\Json::ack( '/sms : ' . $this->_handler->send( $to, $msg, $evt));
+						Json::ack( '/sms : ' . $this->_handler->send( $to, $msg, $evt));
 
 					}
 					else {
-						\Json::nak( '/sms: to is missing' );
+						Json::nak( '/sms: to is missing' );
 
 					}
 
@@ -142,7 +143,7 @@ class controller extends \Controller {
 			}
 
 		}
-		else { \Json::nak( $action); }
+		else { Json::nak( $action); }
 
 	}
 

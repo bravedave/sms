@@ -1,12 +1,12 @@
 <?php
 /*
-	David Bray
-	BrayWorth Pty Ltd
-	e. david@brayworth.com.au
-
-	This work is licensed under a Creative Commons Attribution 4.0 International Public License.
-		http://creativecommons.org/licenses/by/4.0/
-	*/
+ * David Bray
+ * BrayWorth Pty Ltd
+ * e. david@brayworth.com.au
+ *
+ * MIT License
+ *
+*/
 
 namespace sms;
 
@@ -19,34 +19,34 @@ class sms {
 	const smsbroadcastAPI_advanced = 'https://api.smsbroadcast.com.au/api-adv.php';
 	const smsbroadcast_MAXLENGTH = '760';
 
-	static function IsMobilePhone( $_tel = '') {
-		try {
-			$tel = preg_replace( '@[^0-9\+]@','', $_tel);
-			// \sys::logger( sprintf( 'IsMobilePhone :: %s', $tel));
+	// static function IsMobilePhone( $_tel = '') {
+	// 	try {
+	// 		$tel = preg_replace( '@[^0-9\+]@','', $_tel);
+	// 		// \sys::logger( sprintf( 'IsMobilePhone :: %s', $tel));
 
-			if ( $tel) {
-				$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+	// 		if ( $tel) {
+	// 			$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 
-				$phoneNumberObject = ( '+' == substr( $tel, 0, 1) ? $phoneNumberUtil->parse($tel) : $phoneNumberUtil->parse($tel, 'AU'));
+	// 			$phoneNumberObject = ( '+' == substr( $tel, 0, 1) ? $phoneNumberUtil->parse($tel) : $phoneNumberUtil->parse($tel, 'AU'));
 
-				$numberType = $phoneNumberUtil->getNumberType( $phoneNumberObject);
+	// 			$numberType = $phoneNumberUtil->getNumberType( $phoneNumberObject);
 
-				if ( $numberType == \libphonenumber\PhoneNumberType::MOBILE) {
-					return ( true);
+	// 			if ( $numberType == \libphonenumber\PhoneNumberType::MOBILE) {
+	// 				return ( true);
 
-				}
+	// 			}
 
-			}
+	// 		}
 
-		}
-		catch ( Exception $e) {
-			\sys::logger( sprintf( 'IsMobilePhone :: %s : %s', $_tel, $e->getMessage()));
+	// 	}
+	// 	catch ( Exception $e) {
+	// 		\sys::logger( sprintf( 'IsMobilePhone :: %s : %s', $_tel, $e->getMessage()));
 
-		}
+	// 	}
 
-		return ( false);
+	// 	return ( false);
 
-	}
+	// }
 
 	protected static function smsbroadcastSMS( $content ) {
 		$ch = curl_init( self::smsbroadcastAPI_advanced);
