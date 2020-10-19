@@ -192,7 +192,12 @@ class controller extends \Controller {
 		$this->render([
 			'title' => $this->title = 'SMS Settings',
 			'primary' => 'settings',
-			'secondary' =>'index'
+			'secondary' => [
+				'index-title',
+				'index-sms',
+
+			]
+
 		]);
 
 	}
