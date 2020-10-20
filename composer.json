@@ -23,7 +23,7 @@
 		"php": ">=7.0",
 		"bravedave/dvc": "*",
 		"giggsey/libphonenumber-for-php": "^8.4",
-		"bravedave/green": "dev-master"
+		"bravedave/green": "*"
 	},
 	"scripts": {
 		"post-update-cmd": [
