@@ -30,95 +30,6 @@ class sms {
 
 	}
 
-	public function __construct( account $smsAccount, $logger = null ) {
-		$this->account = $smsAccount;
-		$this->smslog = ( is_null( $logger) ? new smslog : $logger);
-		$this->error = (object)['description' => ''];
-
-	}
-
-	public function getError() {
-		return ( $error );
-
-	}
-
-	public function creditURL() {
-		if ( $this->account->enabled) {
-			if ( $this->account->providor == 'smsbroadcast' )
-				return ( 'https://smsbroadcast.com.au/');
-
-		}
-
-		return ('');
-
-	}
-
-	public function balance() {
-		if ( $this->account->enabled) {
-			if ( $this->account->providor == 'smsbroadcast' ) {
-				$content = [
-					'username' =>$this->account->accountid,
-					'password' => $this->account->accountpassword,
-					'action' => 'balance' ];
-
-				$full_result = self::smsbroadcastSMS( $content );
-				//~ error_log( $full_result );
-
-				$a = explode(':', $full_result);
-				if( $a[0] == "OK")
-					return ( $a[1]);
-
-				elseif( $a[0] == "ERROR" )
-					return ( sprintf( 'err : %s', $a[1]));
-
-			}
-
-			return ( -1);
-
-		}
-		else {
-			throw new Exceptions\SMSNotEnabled;
-
-		}
-
-	}
-
-	public function max() {
-		if ( $this->account->enabled) {
-			if ( $this->account->providor == 'smsbroadcast' )
-				return ( self::smsbroadcast_MAXLENGTH);
-
-		}
-
-		return ( '0' );
-
-	}
-
-	public function send( $to = '', $msg = '', $evt = 'sms') {
-		if ( $this->account->enabled) {
-			if ( is_array( $to)) {
-				$a = [];
-				foreach ( $to as $t)
-					$a[] = $this->_send( $t, $msg, $evt );
-
-				return ( implode( ' : ', $a ));
-
-			}
-			elseif ( $to == '') {
-				return ( $this->error->description = 'Empty Telephone');
-
-			}
-			else {
-				return ( $this->_send( $to, $msg, $evt));
-
-			}
-
-		}
-		else
-			return ( $this->error->description = 'Not SMS Enabled');
-
-	}
-
 	protected function _send( $to, $msg, $evt) {
 		if ( $to == '' ) {
 			return 'nak (empty to)';
@@ -202,6 +113,100 @@ class sms {
 		}
 		else {
 			throw new Exceptions\MissingOrInvalidProvidor;
+
+		}
+
+	}
+
+	public function __construct( account $smsAccount, $logger = null ) {
+		$this->account = $smsAccount;
+		$this->smslog = ( is_null( $logger) ? new smslog : $logger);
+		$this->error = (object)['description' => ''];
+
+	}
+
+	public function getError() {
+		return ( $error );
+
+	}
+
+	public function creditURL() {
+		if ( $this->account->enabled) {
+			if ( $this->account->providor == 'smsbroadcast' )
+				return ( 'https://smsbroadcast.com.au/');
+
+		}
+
+		return ('');
+
+	}
+
+	public function balance() {
+		if ( $this->account->enabled) {
+			if ( $this->account->providor == 'smsbroadcast' ) {
+				$content = [
+					'username' =>$this->account->accountid,
+					'password' => $this->account->accountpassword,
+					'action' => 'balance' ];
+
+				$full_result = self::smsbroadcastSMS( $content );
+				//~ error_log( $full_result );
+
+				$a = explode(':', $full_result);
+				if( $a[0] == "OK")
+					return ( $a[1]);
+
+				elseif( $a[0] == "ERROR" )
+					return ( sprintf( 'err : %s', $a[1]));
+
+			}
+
+			return ( -1);
+
+		}
+		else {
+			throw new Exceptions\SMSNotEnabled;
+
+		}
+
+	}
+
+	public function max() {
+		if ( $this->account->enabled) {
+			if ( $this->account->providor == 'smsbroadcast' )
+				return ( self::smsbroadcast_MAXLENGTH);
+
+		}
+
+		return ( '0' );
+
+	}
+
+	public function send( $to = '', $msg = '', $evt = 'sms') {
+		/**
+		 *
+		 */
+		if ( $this->account->enabled) {
+			if ( is_array( $to)) {
+				$a = [];
+				foreach ( $to as $t)
+					$a[] = $this->_send( $t, $msg, $evt );
+
+				return ( implode( ' : ', $a ));
+
+			}
+			elseif ( $to == '') {
+				return ( $this->error->description = 'Empty Telephone');
+
+			}
+			else {
+				return ( $this->_send( $to, $msg, $evt));
+
+			}
+
+		}
+		else {
+			return ( $this->error->description = 'Not SMS Enabled');
 
 		}
 
