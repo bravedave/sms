@@ -306,7 +306,9 @@
 			.then( d => {
 				_.growl( d);
 				if ( 'ack' == d.response) {
-					frm.closest('.modal').trigger('brayworth.success');
+					frm.closest('.modal')
+					.trigger('success')
+					.trigger('brayworth.success');
 
 				}
 				frm.closest('.modal').modal('hide');
