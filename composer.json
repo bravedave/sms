@@ -13,8 +13,14 @@
 	}],
 	"autoload": {
 		"psr-4": {
-			"": "application/app/",
 			"sms\\": "sms/"
+
+		}
+
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"": "application/app/"
 
 		}
 
@@ -22,7 +28,7 @@
 	"require": {
 		"php": ">=7.0",
 		"bravedave/dvc": "*",
-		"giggsey/libphonenumber-for-php": "^8.4",
+		"giggsey/libphonenumber-for-php": "*",
 		"bravedave/green": "*"
 	},
 	"scripts": {
