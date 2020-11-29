@@ -171,6 +171,11 @@ class sms {
 
 	}
 
+	public function enabled() {
+		return $this->account->enabled;
+
+	}
+
 	public function max() {
 		if ( $this->account->enabled) {
 			if ( $this->account->providor == 'smsbroadcast' )

@@ -9,17 +9,22 @@
 */	?>
 
 <ul class="nav flex-column">
-	<li class="nav-item"><a class="nav-link" href="#" id="<?= $uid = strings::rand() ?>">SMS</a></li>
+	<li class="nav-item d-none" id="<?= $_uid = strings::rand() ?>ni"><a class="nav-link" href="#" id="<?= $_uid ?>">SMS</a></li>
 	<li class="nav-item"><a class="nav-link" href="<?= strings::url( $this->route . '/settings') ?>">Settings</a></li>
 
 </ul>
 <script>
-$(document).ready( () => {( _ => {
-	$('#<?= $uid ?>').on( 'click', function( e) {
+( _ => $(document).ready( () => {
+	_.get.sms.enabled().then( () => {
+		console.log( 'sms enabled...');
+		$('#<?= $_uid ?>ni').removeClass( 'd-none');
+
+	});
+
+	$('#<?= $_uid ?>').on( 'click', function( e) {
 		e.stopPropagation(); e.preventDefault();
 
-		_.get.modal( _.url( '<?= $this->route ?>/dialog'))
-		.then( modal => {
+		_.get.sms().then( modal => {
 			modal.trigger( 'add.recipient', '0418745334');
 			$('textarea[name="message"]', modal).focus();
 
@@ -27,5 +32,5 @@ $(document).ready( () => {( _ => {
 
 	});
 
-})( _brayworth_) });	// ready
+}))( _brayworth_);
 </script>

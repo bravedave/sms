@@ -77,7 +77,6 @@
 
 	<script>
 	( _ => {
-
 		let replaceWordCharacters = ( text) => {
 			/**
 				* Replaces commonly-used Windows 1252 encoded chars
@@ -363,12 +362,9 @@
 		$('#<?= $_modal ?>').on( 'add.recipient', ( e, mobile) => $('#<?= $_form ?>').trigger( 'add.recipient',  mobile));
 		$('#<?= $_form ?>').trigger('new-field');
 
+		$(document).ready( () => $('#<?= $msgID ?>').trigger( 'keyup.sms'));	// ready
+
 	}) (_brayworth_);
-
-	$(document).ready( () => {
-		$('#<?= $msgID ?>').trigger( 'keyup.sms');
-
-	});	// ready
 	</script>
 
 </div>

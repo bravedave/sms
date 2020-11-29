@@ -25,11 +25,15 @@
 		}
 
 	},
+	"repositories": [
+		{ "type": "git", "url": "https://github.com/bravedave/dvc"},
+		{ "type": "git", "url": "https://github.com/bravedave/green" }
+	],
 	"require": {
 		"php": ">=7.0",
 		"bravedave/dvc": "*",
-		"giggsey/libphonenumber-for-php": "*",
-		"bravedave/green": "*"
+		"bravedave/green": "*",
+		"giggsey/libphonenumber-for-php": "*"
 	},
 	"scripts": {
 		"post-update-cmd": [

@@ -21,6 +21,8 @@ class postUpdate extends dvc\service {
     green\people\config::green_people_checkdatabase();
     echo( sprintf('%s : %s%s', 'green updated', __METHOD__, PHP_EOL));
 
+    config::route_register( 'sms', 'sms\\controller');
+
   }
 
   static function upgrade() {

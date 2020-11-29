@@ -161,7 +161,30 @@ class controller extends \Controller {
 			}
 
 		}
-		else { Json::nak( $action); }
+		elseif ( 'sms-enabled' == $action) {
+			/*
+			( _ => {
+				_.post({
+					url : _.url('sms'),
+					data : { action : 'sms-enabled'},
+
+				}).then( d => _.growl( d));
+
+			})( _brayworth_);
+
+			*/
+			if ( $this->_handler->enabled()) {
+				Json::ack( $action);
+
+
+			}
+			else { Json::nak( $action); }
+
+		}
+		else {
+			parent::postHandler();
+
+		}
 
 	}
 
