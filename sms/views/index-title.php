@@ -6,9 +6,11 @@
  *
  * MIT License
  *
-*/  ?>
+*/
+
+extract((array)($this->data ?? []));  ?>
 
 <nav class="nav flex-column">
-  <div class="nav-item h6"><a href="<?= strings::url( $this->route) ?>"><?= $this->title ?></a></div>
 
+  <a class="h6" href="<?= $pageUrl ?>"><?= $title ?></a>
 </nav>

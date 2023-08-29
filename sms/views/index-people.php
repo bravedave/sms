@@ -8,7 +8,7 @@
  *
 */	?>
 
-<ul class="nav flex-column">
-	<li class="nav-item"><a class="nav-link" href="<?= strings::url( 'people') ?>">People</a></li>
+<nav class="nav flex-column">
 
-</ul>
+	<a class="nav-link" href="<?= strings::url('people') ?>">People</a>
+</nav>
