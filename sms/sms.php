@@ -24,7 +24,7 @@ class sms {
 	const cellcastAPI = 'https://cellcast.com.au/api/v3/';
 	const cellcast_MAXLENGTH = '918';
 
-	protected static function cellcastSMS(string $apiKey, string $text, array $phone_numbers = []): object {
+	protected static function cellcastSMS(string $apiKey, string $text, array $phone_numbers = []): string|object {
 		try {
 
 			// 'APPKEY: <<APPKEY>>',
@@ -85,11 +85,29 @@ class sms {
 				}
 				curl_close($ch);
 
-				return (object)[
+				$response = (object)[
 					"status" => 'OK',
 					"msg" => "SMS sent successfully",
 					"result" => json_decode($result)
 				];
+
+				// return $response;
+
+				if (200 == $response->result->meta->code) {
+
+					return sprintf(
+						'OK : %s : success: <%s>, credits_used: <%s>',
+						$response->result->msg,
+						$response->result->data->success_number,
+						$response->result->data->credits_used,
+					);
+				} else {
+
+					return sprintf(
+						'NAK : %s',
+						$response->result->msg
+					);
+				}
 			}
 		} catch (\Exception $e) {
 
@@ -218,8 +236,10 @@ class sms {
 
 				if ($result->status == 'OK') {
 
-					logger::dump($result->result, __METHOD__);
-					return $result->balance;
+					// logger::dump($result->result, __METHOD__);
+					return (int)$result->balance == $result->balance ?
+						(int)$result->balance :
+						$result->balance;
 				} elseif ($result->status == "ERROR") {
 
 					return sprintf('err : %s', $result->msg);
