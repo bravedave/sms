@@ -14,15 +14,15 @@
  * [x] data-dismiss => data-bs-dismiss
  * [x] data-toggle => data-bs-toggle
  * [x] data-parent => data-bs-parent
- * [ ] text-right => text-end
- * [ ] custom-select - form-select
- * [ ] mr-* => me-*
- * [ ] ml-* => ms-*
- * [ ] pr-* => pe-*
- * [ ] pl-* => ps-*
- * [ ] input-group-prepend - remove
- * [ ] input-group-append - remove
- * [ ] btn input-group-text => btn btn-light
+ * [x] text-right => text-end
+ * [x] custom-select - form-select
+ * [x] mr-* => me-*
+ * [x] ml-* => ms-*
+ * [x] pr-* => pe-*
+ * [x] pl-* => ps-*
+ * [x] input-group-prepend - remove
+ * [x] input-group-append - remove
+ * [x] btn input-group-text => btn btn-light
  */
 /*
 	( _ => {
@@ -370,9 +370,9 @@ extract((array)$this->data); ?>
 					e.stopPropagation();
 					form.trigger('add.recipient', mobile);
 				})
-				.on(_.bootstrap.version() < 5 ? 'shown.modal' : 'shown.bs.modal', e => {
+				.on('shown.bs.modal', e => {
 
-					form.trigger('new-field');
+					newField().focus();
 					msg.trigger('keyup.sms');
 				});
 		})(_brayworth_);
